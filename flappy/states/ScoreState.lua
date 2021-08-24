@@ -8,7 +8,7 @@
     PlayState when they collide with a Pipe.
 ]]
 
-ScoreState = Class{__includes = BaseState}
+ScoreState = Class { __includes = BaseState }
 
 --[[
     When we enter the score state, we expect to receive the score
@@ -16,6 +16,11 @@ ScoreState = Class{__includes = BaseState}
 ]]
 function ScoreState:enter(params)
     self.score = params.score
+    self.gold = love.graphics.newImage('gold.png')
+    self.silver = love.graphics.newImage('silver.png')
+    self.bronze = love.graphics.newImage('bronze.png')
+    self.xScore = VIRTUAL_WIDTH / 2 - 32
+    self.yScore = 120
 end
 
 function ScoreState:update(dt)
@@ -32,6 +37,12 @@ function ScoreState:render()
 
     love.graphics.setFont(mediumFont)
     love.graphics.printf('Score: ' .. tostring(self.score), 0, 100, VIRTUAL_WIDTH, 'center')
-
-    love.graphics.printf('Press Enter to Play Again!', 0, 160, VIRTUAL_WIDTH, 'center')
+    if self.score >= 2 and self.score <= 4 then
+        love.graphics.draw(self.bronze, self.xScore, self.yScore)
+    elseif self.score > 4 and self.score <= 6 then
+        love.graphics.draw(self.silver, self.xScore, self.yScore)
+    elseif self.score > 6 then
+        love.graphics.draw(self.gold, self.xScore, self.yScore)
+    end
+    love.graphics.printf('Press Enter to Play Again!', 0, 200, VIRTUAL_WIDTH, 'center')
 end

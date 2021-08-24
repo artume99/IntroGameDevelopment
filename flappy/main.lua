@@ -87,7 +87,8 @@ function love.load()
         ['score'] = love.audio.newSource('score.wav', 'static'),
 
         -- https://freesound.org/people/xsgianni/sounds/388079/
-        ['music'] = love.audio.newSource('marios_way.mp3', 'static')
+        ['music'] = love.audio.newSource('marios_way.mp3', 'static'),
+        ['pause'] = love.audio.newSource('pause_sound.wav','static')
     }
 
     -- kick off music
@@ -128,6 +129,7 @@ function love.keypressed(key)
     if key == 'escape' then
         love.event.quit()
     end
+
 end
 
 --[[
